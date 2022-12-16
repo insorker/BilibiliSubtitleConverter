@@ -1,0 +1,34 @@
+{
+  "name": "bilibilisubtitleconverter",
+  "version": "1.0.0",
+  "description": "Bilibili subtitle converter, converting to or from bcc.",
+  "main": "format.js",
+  "scripts": {
+    "dev": "npm run build && vite",
+    "build": "vite build --config vite.config.js"
+  },
+  "keywords": [
+    "bcc"
+  ],
+  "author": "insorker",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "dependencies": {
+    "tsc": "^2.0.4",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "vite": "^4.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
