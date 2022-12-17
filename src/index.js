@@ -32,14 +32,14 @@ if (bsc_converter != null) {
 }
 
 // request
-let bsc_request = document.getElementById('bsc-request');
-let bsc_request_submit = document.getElementById('bsc-request-submit');
+// let bsc_request = document.getElementById('bsc-request');
+// let bsc_request_submit = document.getElementById('bsc-request-submit');
 
-bsc_request_submit.onclick = () => {
-  if (bsc_request.value) {
-    let xhr = new XMLHttpRequest();
-    xhr.open(GET, bsc_request.value);
+// bsc_request_submit.onclick = () => {
+//   if (bsc_request.value) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open(GET, bsc_request.value);
 
-    
-  }
-}
+
+//   }
+// }
