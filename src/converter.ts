@@ -18,7 +18,8 @@ function bcc2string(bcc: BCC): string {
 
 function string2srt(str: string): SRT {
   let srt: SRT = {};
-  let strItems: string[] = str.split('\n\n');
+  let strTrimed: string = str.replace(/\n$/, '');
+  let strItems: string[] = strTrimed.split('\n\n');
   
   for (let srtItems of strItems) {
     let item: string[] = srtItems.split('\n');
