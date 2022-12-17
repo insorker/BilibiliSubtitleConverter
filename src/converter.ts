@@ -27,9 +27,11 @@ function string2srt(str: string): SRT {
     let time: string[] = item[1].split(" --> ");
     let content: string = item.slice(2).join();
 
-    srt[index].from = time[0];
-    srt[index].to = time[1];
-    srt[index].content = content;
+    srt[index] = {
+      from: time[0],
+      to: time[1],
+      content: content
+    };
   }
 
   return srt;
@@ -42,7 +44,7 @@ function srt2string(srt: SRT): string {
     let time = srt[index].from + " --> " + srt[index].to;
     let content = srt[index].content;
 
-    str += [ index, time, content ].join('\n') + '\n';
+    str += [ index, time, content ].join('\n') + '\n\n';
   }
 
   return str;
@@ -58,17 +60,18 @@ function srt2bcc(srt: SRT, bcc_custom?: BCC_Custom): BCC {
     let timeArray: string[] = time.split(':');
     let hh: number = parseInt(timeArray[0]);
     let mm: number = parseInt(timeArray[1]);
-    timeArray = timeArray[2].split(',');
-    let ss: number = parseInt(timeArray[0]);
-    let msms: number = parseInt(timeArray[0]);
+    let ss: number = parseFloat(timeArray[2].replace(',', '.'));
 
-    return hh * 60 * 60 + mm * 60 + ss + msms;
+    return hh * 60 * 60 + mm * 60 + ss;
   };
 
   for (let index in srt) {
-    bcc.body[index].from = timeConverter(srt[index].from);
-    bcc.body[index].to = timeConverter(srt[index].to);
-    bcc.body[index].content = srt[index].content;
+    bcc.body[index] = {
+      from: timeConverter(srt[index].from),
+      to: timeConverter(srt[index].to),
+      location: 2,
+      content: srt[index].content
+    }
   }
 
   return bcc;
@@ -82,15 +85,17 @@ function bcc2srt(bcc: BCC): SRT {
         Math.trunc(second / 60 / 60),
         Math.trunc(second / 60),
         Math.trunc(second % 60)
-      ].join(':'),
+      ].map((num) => { return num.toString().padEnd(2, '0'); }).join(':'),
       (second % 1).toString().slice(2).padEnd(3, '0')
     ].join(",");
   };
 
   bcc.body.forEach((item, index) => {
-    srt[index].from = timeConverter(item.from);
-    srt[index].to = timeConverter(item.to);
-    srt[index].content = item.content;
+    srt[index] = {
+      from: timeConverter(item.from),
+      to: timeConverter(item.to),
+      content: item.content
+    };
   });
 
   return srt;
