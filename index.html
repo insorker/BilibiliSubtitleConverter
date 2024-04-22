@@ -5,13 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BiliBili Subtitle Converter</title>
+  <style>
+    #main {
+      margin: 10rem;
+    }
+  </style>
 </head>
 <body>
-  <input id="bsc-converter" type="file" accept=".bcc,.srt" />
-  <div>
-    <!-- <input id="bsc-request" type="text" placeholder="B站视频网址" /> -->
-    <!-- <input id="bsc-request-submit" type="submit" value="获取" /> -->
+  <div id="main">
+    <p>作者按^^_</p>
+    <p>点击“选择文件”上传以“.srt”或“.bcc”为后缀的文件</p>
+    <p>转换完成后是自动下载（保存在浏览器默认下载文件夹，如“下载”）</p>
+    <p>有任何问题可以通过以下链接进行反馈</p>
+    <ul>
+      <li>B站: <a href="https://www.bilibili.com/read/cv20572118/">https://www.bilibili.com/read/cv20572118/</a></li>
+      <li>email: <a href="mailto:insorker@qq.com">insorker@qq.com</a></li>
+      <li>github: <a href="https://github.com/insorker/BilibiliSubtitleConverter/issues">https://github.com/insorker/BilibiliSubtitleConverter/issues</a></li>
+    </ul>
+    <br />
+    <input id="bsc-converter" type="file" accept=".bcc,.srt" />
   </div>
+  <!-- <div>
+    <input id="bsc-request" type="text" placeholder="B站视频网址" />
+    <input id="bsc-request-submit" type="submit" value="获取" />
+  </div> -->
   <script src="/dist/index.mjs"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ if (bsc_converter != null) {
   bsc_converter.onchange = () => {
     let reader = new FileReader();
     let type = bsc_converter.value.split('.').pop();
+    let name = "result";
 
     reader.readAsText(bsc_converter.files[0], 'utf-8');
     reader.onload = () => {
@@ -18,16 +19,21 @@ if (bsc_converter != null) {
         let srt = bcc2srt(bcc);
         let res = srt2string(srt);
 
-        download(res, "res.srt", "text/plain");
+        download(res, name + ".srt", "text/plain");
       }
       else if (type == 'srt') {
         let srt = string2srt(txt);
         let bcc = srt2bcc(srt);
         let res = bcc2string(bcc);
       
-        download(res, "res.bcc", "text/plain");
+        download(res, name + ".bcc", "text/plain");
+      }
+      else {
+        alert("文件缺少.srt/.bcc后缀")
       }
     };
+    
+    bsc_converter.value = ''
   };
 }
 
