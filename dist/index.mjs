@@ -1,12 +1,12 @@
-var E = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, I = { exports: {} };
+var E = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, k = { exports: {} };
 (function(t, l) {
   (function(i, e) {
     t.exports = e();
   })(E, function() {
     return function i(e, n, c) {
-      var a = window, f = "application/octet-stream", d = c || f, o = e, b = !n && !c && o, s = document.createElement("a"), B = function(r) {
+      var a = window, f = "application/octet-stream", d = c || f, o = e, b = !n && !c && o, s = document.createElement("a"), x = function(r) {
         return String(r);
-      }, u = a.Blob || a.MozBlob || a.WebKitBlob || B, g = n || "download", p, R;
+      }, u = a.Blob || a.MozBlob || a.WebKitBlob || x, g = n || "download", p, B;
       if (u = u.call ? u.bind(a) : Blob, String(this) === "true" && (o = [o, d], d = o[0], o = o[1]), b && b.length < 2048 && (g = b.split("/").pop().split("?")[0], s.href = b, s.href.indexOf(b) !== -1)) {
         var h = new XMLHttpRequest();
         return h.open("GET", b, !0), h.responseType = "blob", h.onload = function(r) {
@@ -16,22 +16,22 @@ var E = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : ty
         }, 0), h;
       }
       if (/^data:([\w+-]+\/[\w+.-]+)?[,;]/.test(o))
-        if (o.length > 1024 * 1024 * 1.999 && u !== B)
+        if (o.length > 1024 * 1024 * 1.999 && u !== x)
           o = C(o), d = o.type || f;
         else
           return navigator.msSaveBlob ? navigator.msSaveBlob(C(o), g) : w(o);
       else if (/([\x80-\xff])/.test(o)) {
-        var y = 0, x = new Uint8Array(o.length), L = x.length;
-        for (y; y < L; ++y)
-          x[y] = o.charCodeAt(y);
-        o = new u([x], { type: d });
+        var y = 0, R = new Uint8Array(o.length), I = R.length;
+        for (y; y < I; ++y)
+          R[y] = o.charCodeAt(y);
+        o = new u([R], { type: d });
       }
       p = o instanceof u ? o : new u([o], { type: d });
       function C(r) {
-        var m = r.split(/[:;,]/), v = m[1], _ = m[2] == "base64" ? atob : decodeURIComponent, U = _(m.pop()), A = U.length, S = 0, k = new Uint8Array(A);
+        var m = r.split(/[:;,]/), v = m[1], L = m[2] == "base64" ? atob : decodeURIComponent, U = L(m.pop()), A = U.length, S = 0, F = new Uint8Array(A);
         for (S; S < A; ++S)
-          k[S] = U.charCodeAt(S);
-        return new u([k], { type: v });
+          F[S] = U.charCodeAt(S);
+        return new u([F], { type: v });
       }
       function w(r, m) {
         if ("download" in s)
@@ -54,27 +54,26 @@ Use Save As... to download, then click back to return to this page.`) && (locati
       if (a.URL)
         w(a.URL.createObjectURL(p), !0);
       else {
-        if (typeof p == "string" || p.constructor === B)
+        if (typeof p == "string" || p.constructor === x)
           try {
             return w("data:" + d + ";base64," + a.btoa(p));
           } catch {
             return w("data:" + d + "," + encodeURIComponent(p));
           }
-        R = new FileReader(), R.onload = function(r) {
+        B = new FileReader(), B.onload = function(r) {
           w(this.result);
-        }, R.readAsDataURL(p);
+        }, B.readAsDataURL(p);
       }
       return !0;
     };
   });
-})(I);
-const M = I.exports;
-let O = {
+})(k);
+const M = k.exports, O = {
   font_size: 0.4,
   font_color: "#FFFFFF",
   background_alpha: 0.5,
   background_color: "#9C27B0",
-  Stroke: "none"
+  stroke: "none"
 };
 function j(t) {
   return JSON.parse(t);
@@ -127,7 +126,7 @@ function z(t, l) {
   return i;
 }
 function G(t) {
-  let l = {}, i = (e) => [[Math.trunc(e / 60 / 60), Math.trunc(e / 60), Math.trunc(e % 60)].map((n) => n.toString().padEnd(2, "0")).join(":"), (e % 1).toString().slice(2).padEnd(3, "0")].join(",");
+  let l = {}, i = (e) => [[Math.trunc(e / 60 / 60), Math.trunc(e % 3600 / 60), Math.trunc(e % 60)].map((n) => n.toString().padStart(2, "0")).join(":"), (e % 1).toFixed(3).slice(2)].join(",");
   return t.body.forEach((e, n) => {
     l[n] = {
       from: i(e.from),
@@ -136,17 +135,17 @@ function G(t) {
     };
   }), l;
 }
-let F = M, T = document.getElementById("bsc-converter");
+let _ = M, T = document.getElementById("bsc-converter");
 T != null && (T.onchange = () => {
   let t = new FileReader(), l = T.value.split(".").pop(), i = "result";
   t.readAsText(T.files[0], "utf-8"), t.onload = () => {
     let e = t.result;
     if (l == "bcc") {
       let n = j(e), c = G(n), a = q(c);
-      F(a, i + ".srt", "text/plain");
+      _(a, i + ".srt", "text/plain");
     } else if (l == "srt") {
       let n = N(e), c = z(n), a = D(c);
-      F(a, i + ".bcc", "text/plain");
+      _(a, i + ".bcc", "text/plain");
     } else
       alert("文件缺少.srt/.bcc后缀");
   }, T.value = "";

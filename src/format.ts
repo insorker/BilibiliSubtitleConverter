@@ -1,23 +1,18 @@
-interface BCC {
+interface BCC_Head {
   font_size: number;
   font_color: string;
   background_alpha: number;
   background_color: string;
-  Stroke: string;
+  stroke: string;
+};
+
+interface BCC extends BCC_Head {
   body: {
     "from": number;
     "to": number;
     "location": number;
     "content": string;
   }[];
-};
-
-interface BCC_Custom {
-  font_size: number;
-  font_color: string;
-  background_alpha: number;
-  background_color: string;
-  Stroke: string;
 };
 
 interface SRT {
@@ -28,4 +23,4 @@ interface SRT {
   };
 };
 
-export { BCC, BCC_Custom, SRT }
+export { BCC, BCC_Head, SRT };

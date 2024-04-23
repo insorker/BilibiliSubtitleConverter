@@ -1,11 +1,11 @@
-import { BCC, BCC_Custom, SRT } from "./format";
+import { BCC, BCC_Head, SRT } from "./format";
 
-let bcc_default: BCC_Custom = {
+const bcc_head_default: BCC_Head = {
   font_size: 0.4,
   font_color: "#FFFFFF",
   background_alpha: 0.5,
   background_color: "#9C27B0",
-  Stroke: "none",
+  stroke: "none",
 };
 
 function string2bcc(str: string): BCC {
@@ -50,10 +50,10 @@ function srt2string(srt: SRT): string {
   return str;
 }
 
-function srt2bcc(srt: SRT, bcc_custom?: BCC_Custom): BCC {
+function srt2bcc(srt: SRT, BCC_Head?: BCC_Head): BCC {
   let bcc: BCC = {
-    ...bcc_default,
-    ...bcc_custom,
+    ...bcc_head_default,
+    ...BCC_Head,
     body: []
   };
   let timeConverter = (time: string): number => {
@@ -83,10 +83,10 @@ function bcc2srt(bcc: BCC): SRT {
     return [
       [
         Math.trunc(second / 60 / 60),
-        Math.trunc(second / 60),
+        Math.trunc((second % 3600) / 60),
         Math.trunc(second % 60)
-      ].map((num) => { return num.toString().padEnd(2, '0'); }).join(':'),
-      (second % 1).toString().slice(2).padEnd(3, '0')
+      ].map((num) => { return num.toString().padStart(2, '0'); }).join(':'),
+      (second % 1).toFixed(3).slice(2)
     ].join(",");
   };
 
@@ -102,10 +102,6 @@ function bcc2srt(bcc: BCC): SRT {
 }
 
 export {
-  string2bcc,
-  string2srt,
-  bcc2string,
-  srt2string,
-  srt2bcc,
-  bcc2srt
-}
+  bcc2srt, bcc2string, srt2bcc, srt2string, string2bcc,
+  string2srt
+};
