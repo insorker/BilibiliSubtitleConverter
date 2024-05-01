@@ -1,5 +1,7 @@
 import { string2bcc, string2srt, bcc2string, srt2string, srt2bcc, bcc2srt } from "./converter";
-let download = require("downloadjs");
+import { exportFile } from 'fs-browsers'
+// TODO : downloadjs 处理部分中文编码存在问题
+// let download = require("downloadjs");
 
 // converte
 let bsc_converter = document.getElementById('bsc-converter');
@@ -19,14 +21,14 @@ if (bsc_converter != null) {
         let srt = bcc2srt(bcc);
         let res = srt2string(srt);
 
-        download(res, name + ".srt", "text/plain");
+        exportFile(res, name + '.srt')
       }
       else if (type == 'srt') {
         let srt = string2srt(txt);
         let bcc = srt2bcc(srt);
         let res = bcc2string(bcc);
       
-        download(res, name + ".bcc", "text/plain");
+        exportFile(res, name + '.bcc')
       }
       else {
         alert("文件缺少.srt/.bcc后缀")

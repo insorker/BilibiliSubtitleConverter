@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "downloadjs": "^1.4.7",
+    "fs-browsers": "^2.1.1",
     "tsc": "^2.0.4",
     "typescript": "^4.9.4"
   },
